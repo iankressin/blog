@@ -3,18 +3,10 @@ title: Solidity coding challenges PT. 1
 description: First post.
 date: '2023-08-19'
 categories:
-  - solidity
-  - assembly
+  - Solidity
+  - Assembly
 published: true
 ---
-
-# Solidity coding challenges PT. 1
-
-TODOs
-[] Check if all the snippets compiles
-[] Check if the name of all variables in the snippets are consistent with the challenge
-
-[] Review the whole text
 
 # Introduction
 

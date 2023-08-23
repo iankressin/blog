@@ -1,4 +1,4 @@
-<div class="py-8 px-20">
+<div class="">
     <div class="flex justify-between">
         <div class="font-heading font-semibold text-2xl">Ian K. Guimaraes</div>
         <div>
