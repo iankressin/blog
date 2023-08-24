@@ -39,7 +39,7 @@ contract StructDefiner {
 contract Storage {
     StructDefiner.MyStruct[] internal structs;
 
-    function getStructByIndex(uint256 idx) external view returns (bytes memory) {
+    function getStructByIndex(uint256 index) external view returns (bytes memory) {
         assembly {
             // your code here
         }
@@ -53,8 +53,8 @@ contract Controller {
         storage = Storage(_storage);
     }
 
-    getStruct(uint256 idx) public returns (StructDefiner.MyStruct myStruct) {
-        bytes memory _myStruct = storage.getStructByIndex(idx);
+    getStruct(uint256 index) public returns (StructDefiner.MyStruct myStruct) {
+        bytes memory _myStruct = storage.getStructByIndex(index);
 
         assembly {
             // your code here
@@ -90,7 +90,7 @@ contract DynamicArrayStorage {
 
 The Figure 1 shows the storage layout for the contract above.
 
-![https://www.notion.so/home/kig/Projects/solidity/playground/DynamicArrayStorage.svg](https://www.notion.so/home/kig/Projects/solidity/playground/DynamicArrayStorage.svg)
+![/images/posts/solidity-coding-challenges/DynamicArrayStorage.svg](/images/posts/solidity-coding-challenges/DynamicArrayStorage.svg)
 
 *Figure 1 - DynamicArrayStorage contract storage layout*
 
@@ -122,7 +122,7 @@ contract StructStorage {
 
 The Figure 2 represents the storage layout of the `StructStorage` contract above.
 
-![https://www.notion.so/home/kig/Projects/solidity/playground/StructStorage.svg](https://www.notion.so/home/kig/Projects/solidity/playground/StructStorage.svg)
+![/images/posts/solidity-coding-challenges/StructStorage.svg](/images/posts/solidity-coding-challenges/StructStorage.svg)
 
 *Figure 2 - StructStorage contract storage layout*
 
@@ -152,11 +152,7 @@ contract DynamicArrayOfStructsStorage {
 
 The Figure 3 show the storage layout of DynamicArrayOfStructsStorage
 
-```
-
-```
-
-![https://www.notion.so/home/kig/Projects/solidity/playground/DynamicArrayOfStructsStorage.svg](https://www.notion.so/home/kig/Projects/solidity/playground/DynamicArrayOfStructsStorage.svg)
+![/images/posts/solidity-coding-challenges/DynamicArrayOfStructsStorage.svg](/images/posts/solidity-coding-challenges/DynamicArrayOfStructsStorage.svg)
 
 *Figure 3 - DynamicArrayOfStructsStorage contract storage layout*
 
@@ -219,7 +215,11 @@ contract StructDefiner {
 
 Each storage slot is 32 bytes (256 bits), so `someField` occupies a storage slot alone. An address type is 20 bytes long (160 bits), although `someAddress` cannot be packed together with `someOtherField`, since it is a `uint128`, and takes 16 bytes, which will exceed the limit of 32 bytes of a storage cell, therefore it also takes a whole storage slot. The last two fields `someOtherField` and `oneMoreField` are both 16 bytes long, which means they can be packed together into a single slot. So the total amount of storage slots used by each `MyStruct` object is **three**.
 
-// TODO: INSERT STORAGE LAYOUT
+Figure 4 shows the storage layout of StructDefiner contract, where is possible to notice the structure mentioned above.
+
+![/images/posts/solidity-coding-challenges/StructDefiner.svg](/images/posts/solidity-coding-challenges/StructDefiner.svg)
+
+*Figure 4 - StructDefiner contract storage layout*
 
 This gives `getStructByIndex` two pieces of information. First, it tells our function that when calculating the storage position of entries in the `structs` array, an offset of three slots should be taken into consideration to account for each slot used by a `MyStruct`. Second, it provides context for what each one of the storage cells is holding, which will be fundamental for encoding the data.
 
@@ -243,8 +243,6 @@ contract Storage {
 ```
 
 As the items in the dynamic array are stored sequentially, and so are the struct fields, for each entry of the array, the implementation should "jump" three contiguous slots to reach the memory location where the next item is stored. That is exactly what `storageLocationOfIndex` is calculating: the storage address of an element of the array.
-
-// TODO: Check if there are too many "Now"s around.
 
 Now, it is possible to start reading data from the contract storage using inline assembly.
 
@@ -333,8 +331,8 @@ contract Storage {
             let structSlot1 := sload(add(storageLocation, 0x1))
             let structSlot2 := sload(add(storageLocation, 0x2))
 
-						let someOtherField := shr(0x80, structSlot2)
-						let oneMoreField := and(structSlot2, sub(shl(0x80, 0x1), 0x1))
+            let someOtherField := shr(0x80, structSlot2)
+            let oneMoreField := and(structSlot2, sub(shl(0x80, 0x1), 0x1))
 
             mstore(add(payload, 0x20), structSlot0)
             mstore(add(payload, 0x40), structSlot1)
@@ -389,14 +387,13 @@ contract Controller {
     }
 
     function getStruct(uint256 index) public returns (StructDefiner.MyStruct myStruct) {
-        bytes memory _myStruct = storage.getStructByIndex(idx);
+        bytes memory _myStruct = storage.getStructByIndex(index);
 
         assembly {
             // your code here
         }
     }
 }
-
 ```
 
 Similar to the encoding function, the `getStructByIndex` method is called with an index parameter. The byte array returned from this method is then decoded to a `MyStruct` object, as indicated by the function signature.
@@ -406,8 +403,18 @@ Before decoding the string of bytes that this function receives from `getStructB
 Since the function has already loaded the byte array returned from the encoding function, it is now possible to arrange those chunks in a way that the EVM can interpret as a single struct.
 
 ```solidity
-    function decodeStructByIndex(uint256 index) public view returns (StructDefiner.MyStruct memory myStruct) {
-        bytes memory encodedStruct = storage.getStructByIndex(idx);
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Controller {
+    Storage internal storage;
+
+    constructor(addrerss _storage) {
+        storage = Storage(_storage);
+    }
+
+    function getStruct(uint256 index) public returns (StructDefiner.MyStruct myStruct) {
+        bytes memory _myStruct = storage.getStructByIndex(index);
 
         assembly {
             myStruct := mload(0x40)
@@ -420,7 +427,7 @@ Since the function has already loaded the byte array returned from the encoding 
             mstore(0x40, add(myStruct, 0xa0))
         }
     }
-
+}
 ```
 
 The first step to start decoding `encodedStruct` is to inform the EVM where in memory the first 32 bytes of our struct are located. This is done by fetching the free memory pointer from the memory position `0x40`.

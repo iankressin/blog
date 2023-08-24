@@ -1,8 +1,8 @@
 <script lang="ts">
     import "../../syntax.css"
 	// import { formatDate } from '$lib/utils'
+
 	export let data
-    // [&>pre]:bg-stone-900 [&>pre]:rounded-lg [&>pre]:py-4 [&>pre]:px-4 [&>pre]:text-white [&>pre]:text-sm
 </script>
 
 <head>
@@ -26,8 +26,8 @@
         <!-- Tags -->
         <div class="tags flex gap-2">
             {#each data.meta.categories as category}
-                <div class="bg-stone-100 rounded-full">
-                    <span class="text-slate-950 p-2">{category}</span>
+                <div class="bg-teal-800 rounded-full">
+                    <span class="text-white p-2 text-sm font-semibold cursor-pointer">{category}</span>
                 </div>
             {/each}
         </div>
