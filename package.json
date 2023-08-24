@@ -35,6 +35,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@wooorm/starry-night": "^2.1.1",
 		"highlight.js": "^11.8.0"
 	}
 }
