@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center gap-2 tablet:flex-row tablet:justify-between">
         <div class="font-heading font-semibold text-2xl">
             <a href="/">
-                Ian K. Guimaraes
+                Ian K. Guimarães
             </a>
         </div>
         <div>
