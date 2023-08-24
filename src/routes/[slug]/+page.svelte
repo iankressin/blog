@@ -20,8 +20,7 @@
     <!-- Title -->
 	<hgroup class="flex flex-col gap-1">
 		<h1 class="text-3xl font-semibold">{data.meta.title}</h1>
-		<!-- <p>Published at {formatDate(data.meta.date)}</p> -->
-		<p>Published at 20/08/2023</p>
+		<p class="italic text-sm">Published on {data.meta.date}</p>
 
         <!-- Tags -->
         <div class="tags flex gap-2">
@@ -40,6 +39,7 @@
         [&>blockquote]:px-4 [&>blockquote]:border-l-4 [&>blockquote]:italic
         [&>p>code]:bg-stone-900 [&>p>code]:p-1 [&>p>code]:rounded [&>p>code]:text-red-300 [&>p>code]:text-sm
         [&>p>a]:text-blue-400 [&>p>a]:underline [&>p>a]:underline-offset-2
+        [&>p>em]:text-sm [&>p>em]:text-center
     ">
 		<svelte:component this={data.content} />
 	</div>

@@ -94,7 +94,7 @@ The Figure 1 shows the storage layout for the contract above.
 
 *Figure 1 - DynamicArrayStorage contract storage layout*
 
-The image above shows that `slot 0` points to `slot 0x290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563`, which is the output of `keccak256(0x0)`. Starting from this slot, the next elements of this array will occupy the slots `0x290de...f3e564`, `0x290de...f3e565`, `0x290de...f3e566`, and so on.
+The image above shows that `slot 0` points to `slot 0x290de...f3e563`, which is the output of `keccak256(0x0)`. Starting from this slot, the next elements of this array will occupy the slots `0x290de...f3e564`, `0x290de...f3e565`, `0x290de...f3e566`, and so on.
 
 In the case of `dynamicArray`, each storage slot can hold up to two elements of the list due to [EVM's variable packing](https://fravoll.github.io/solidity-patterns/tight_variable_packing.html). Each slot is 32 bytes long, and the elements of the array are 16 bytes long.
 

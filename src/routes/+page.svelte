@@ -13,11 +13,22 @@
 <section>
 	<ul class="posts">
 		{#each data.posts as post}
-			<li class="post">
-				<a href={post.slug} class="title">{post.title}</a>
-				<!-- <p class="date">{formatDate(post.date)}</p> -->
-				<p class="description">{post.description}</p>
-			</li>
+            <a href={post.slug} class="title">
+                <li class="flex flex-col gap-2">
+                    <h1 class="font-semibold text-lg">{post.title}</h1>
+                    <!-- <p class="date">{formatDate(post.date)}</p> -->
+
+                        <div class="tags flex gap-2">
+                            {#each post.categories as category}
+                                <div class="bg-teal-800 rounded-full">
+                                    <span class="text-white p-2 text-sm font-semibold cursor-pointer">{category}</span>
+                                </div>
+                            {/each}
+                        </div>
+
+                        <p class="description italic text-sm">Publish at {post.date}</p>
+                </li>
+            </a>
 		{/each}
 	</ul>
 </section>
