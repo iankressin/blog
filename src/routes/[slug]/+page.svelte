@@ -5,10 +5,6 @@
 	export let data
 </script>
 
-<head>
-    <link href="themes/prism-ghcolors.css" rel="stylesheet" />
-</head>
-
 <!-- SEO -->
 <svelte:head>
 	<title>{data.meta.title}</title>
@@ -36,6 +32,7 @@
 	<div class="
         flex flex-col gap-4 font-serif text-lg
         [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:mt-4 [&>h1]:mt-2  [&>h1]:font-sans
+        [&>h2]:text-xl [&>h2]:font-bold [&>h2]:mt-4 [&>h2]:mt-2  [&>h2]:font-sans
         [&>blockquote]:px-4 [&>blockquote]:border-l-4 [&>blockquote]:italic
         [&>p>code]:bg-stone-900 [&>p>code]:p-1 [&>p>code]:rounded [&>p>code]:text-red-300 [&>p>code]:text-sm
         [&>p>a]:text-blue-400 [&>p>a]:underline [&>p>a]:underline-offset-2
