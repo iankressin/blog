@@ -8,8 +8,8 @@
         <div>
             <ul class="flex gap-10">
                 <li><a href="/">Blog</a></li>
+                <li><a href="https://x.com/iankguimaraes">Twitter</a></li>
                 <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
             </ul>
         </div>
     </div>

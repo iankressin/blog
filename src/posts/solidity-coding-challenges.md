@@ -1,6 +1,6 @@
 ---
-title: Solidity coding challenges PT. 1
-description: First post.
+title: Cracking Solidity Storage with Assembly
+description: Encoding and decoding EVM storage structures using Solidity assembly insights.
 date: '2023-08-19'
 categories:
   - Solidity

@@ -14,10 +14,9 @@
 	<ul class="posts">
 		{#each data.posts as post}
             <a href={post.slug} class="title">
-                <li class="flex flex-col gap-2">
-                    <h1 class="font-semibold text-lg">{post.title}</h1>
-                    <!-- <p class="date">{formatDate(post.date)}</p> -->
-
+                <li class="flex flex-col gap-3">
+                    <h1 class="font-semibold text-lg leading-none">{post.title}</h1>
+                    <p class="text-sm leading-none">{post.description}</p>
                         <div class="tags flex gap-2">
                             {#each post.categories as category}
                                 <div class="bg-teal-800 rounded-full">
@@ -26,7 +25,7 @@
                             {/each}
                         </div>
 
-                        <p class="description italic text-sm">Publish at {post.date}</p>
+                        <p class="italic text-sm">Publish at {post.date}</p>
                 </li>
             </a>
 		{/each}
