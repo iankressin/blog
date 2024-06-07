@@ -1,3 +1,3 @@
 [submodule "src/assets/obsidian-backup"]
 	path = src/assets/obsidian-backup
-	url = git@github.com:iankressin/obsidian-backup.git
+	url = https://github.com/iankressin/obsidian-backup.git
