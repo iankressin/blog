@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "git submodule update --init && vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -35,7 +35,5 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@wooorm/starry-night": "^2.1.1",
-		"highlight.js": "^11.8.0"
 	}
 }
