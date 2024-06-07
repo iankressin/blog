@@ -2,11 +2,8 @@ import { error } from '@sveltejs/kit';
 
 export async function load({ params }) {
 	try {
-		const slug = `${params.slug.replaceAll('_', ' ')}.md`;
-		const path = `/src/assets/obsidian-backup/3 - Mini Essays/${slug}`;
-
-		/* @vite-ignore */
-		const essay = await import(path);
+		const slug = `${params.slug.replaceAll('_', ' ')}`;
+		const essay = await import(`../../../essays/${slug}.md`);
 
 		return {
 			content: essay.default,

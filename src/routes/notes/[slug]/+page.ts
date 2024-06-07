@@ -3,11 +3,8 @@ import { error } from '@sveltejs/kit';
 /* @vite-ignore */
 export async function load({ params }) {
 	try {
-		const slug = `${params.slug.replaceAll('_', ' ')}.md`;
-		const path = `/src/assets/obsidian-backup/2 - Notes/${slug}`;
-
-		/* @vite-ignore */
-		const note = await import(path);
+		const slug = `${params.slug.replaceAll('_', ' ')}`;
+		const note = await import(`../../../notes/${slug}.md`);
 
 		return {
 			content: note.default,

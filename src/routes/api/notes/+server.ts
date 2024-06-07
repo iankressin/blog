@@ -2,9 +2,9 @@ import { json } from '@sveltejs/kit';
 import type { Content } from '$lib/types';
 
 async function getNotes() {
-	let posts: Content[] = [];
+	let notes: Content[] = [];
 
-	const paths = import.meta.glob('/src/assets/obsidian-backup/2 - Notes/*.md', {
+	const paths = import.meta.glob('/src/notes/*.md', {
 		eager: true
 	});
 
@@ -20,15 +20,15 @@ async function getNotes() {
 			const metadata = file.metadata as Omit<Content, 'slug'>;
 			metadata.title = title;
 			const post = { ...metadata, slug } satisfies Content;
-			posts.push(post);
+			notes.push(post);
 		}
 	}
 
-	posts = posts.sort(
+	notes = notes.sort(
 		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
 	);
 
-	return posts;
+	return notes;
 }
 
 export async function GET() {

@@ -4,7 +4,7 @@ import type { Content } from '$lib/types';
 async function getEssays() {
 	let essays: Content[] = [];
 
-	const paths = import.meta.glob('/src/assets/obsidian-backup/3 - Mini Essays/*.md', {
+	const paths = import.meta.glob('../../../essays/*.md', {
 		eager: true
 	});
 

@@ -4,7 +4,11 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "git submodule update --init && vite build",
+        "vanila-build": "vite build",
+        "submodule": "git submodule update --init",
+        "move:notes": "mkdir src/notes && cp src/assets/obsidian-backup/2\\ -\\ Notes/*.md src/notes",
+        "move:essays": "mkdir src/essays && cp src/assets/obsidian-backup/3\\ -\\ Mini\\ Essays/*.md src/essays",
+        "build": "npm run submodule && npm run move:notes && npm run move:essays && vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
