@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"vanila-build": "vite build",
-		"submodule": "git submodule update --remote && git pull origin main",
+		"submodule": "git submodule update --remote && cd src/assets/obsidian-backup && git pull origin main",
 		"move:notes": "mkdir src/notes && cp src/assets/obsidian-backup/2\\ -\\ Notes/*.md src/notes",
 		"move:essays": "mkdir src/essays && cp src/assets/obsidian-backup/3\\ -\\ Mini\\ Essays/*.md src/essays",
 		"build": "npm run submodule && npm run move:notes && npm run move:essays && vite build",
