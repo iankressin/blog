@@ -5,7 +5,7 @@
 	import Header from '$lib/components/Header.svelte';
 </script>
 
-<div class="flex justify-center bg-zinc-800 text-slate-100 h-full min-h-screen">
+<div class="flex justify-center bg-dim-1 text-white h-full min-h-screen">
 	<div class="h-full w-full laptop:max-w-4xl py-8 px-8 laptop:px-20 flex flex-col gap-16">
 		<Header />
 

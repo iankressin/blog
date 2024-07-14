@@ -17,13 +17,18 @@
 					{/if}
 					<div class="tags flex gap-2">
 						{#each content.tags as category}
-							<div class="bg-teal-800 rounded-full">
-								<span class="text-white p-2 text-sm font-semibold cursor-pointer">{category}</span>
+							<div
+								class="rounded-full"
+								class:bg-green={category == 'final'}
+								class:bg-yellow={category != 'final'}
+							>
+								<span class="p-2 text-sm cursor-pointer text-dim-0"
+									>{category.replace('#', '')}</span
+								>
 							</div>
 						{/each}
+						<p class="italic text-sm">Publish at {content.date}</p>
 					</div>
-
-					<p class="italic text-sm">Publish at {content.date}</p>
 				</li>
 			</a>
 		{/each}

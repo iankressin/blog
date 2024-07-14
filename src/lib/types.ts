@@ -1,5 +1,3 @@
-// export type Categories = 'sveltekit' | 'svelte'
-
 export interface Content {
 	title: string;
 	slug: string;
